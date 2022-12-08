@@ -8,10 +8,24 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import PeopleIcon from '@mui/icons-material/People';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TerrainIcon from '@mui/icons-material/Terrain';
+import AddRoadIcon from '@mui/icons-material/AddRoad';
+import ForestIcon from '@mui/icons-material/Forest';
+import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useHashConnect } from "../../assets/api/HashConnectAPIProvider.tsx";
+
+const TOTAL_MAP = "total-map";
+const SINGLE_MAP = "single-map";
+const EDIT_MAP = "edit-map";
+
+const MAP_TYPE = [TOTAL_MAP, SINGLE_MAP, EDIT_MAP];
 
 function Main() {
 
@@ -25,10 +39,64 @@ function Main() {
     const [playerInfo, setPlayerInfo] = useState({});
 
     const [walletNftInfo, setWalletNftInfo] = useState([]);
+    const [currentLandInfo, setCurrentLandInfo] = useState({
+        tokenId: env.DEGENLAND_NFT_ID,
+        serialNum: 1,
+        buildingCount: 10,
+        customerCount: 10,
+        landBalance: 100
+    });
 
-    const [selectedLand, setSelectedLand] = useState(0);
+    const [groundTileInfo, setGroundTileInfo] = useState([
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-1.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-2.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-3.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-4.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-5.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-6.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-7.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-8.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-9.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-10.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-11.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-12.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-13.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-14.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-15.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-16.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-17.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-18.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-19.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-20.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-21.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-22.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-23.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-24.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-25.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-26.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-27.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-28.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-29.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-30.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-31.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-32.png" },
+        { url: process.env.PUBLIC_URL + "imgs/ground/g-33.png" }
+    ]);
 
-    const onChangeSelectLand = (event: React.SyntheticEvent, newValue: number) => {
+    const [selectedLandTabNo, setSelectedLand] = useState(0);
+    const [currentMap, setCurrentMap] = useState(MAP_TYPE[2]);
+
+    const [drawMapToolValue, setDrawMapToolValue] = React.useState(0);
+
+    const onChangeDrawMapTool = (event, newValue) => {
+        setDrawMapToolValue(newValue);
+    };
+
+    const onClickTile = (index_) => {
+        console.log("onClickTile - 1 : ", index_);
+    }
+
+    const onChangeSelectedLandTabNo = (event: React.SyntheticEvent, newValue: number) => {
         setSelectedLand(newValue);
     };
 
@@ -134,28 +202,28 @@ function Main() {
     return (
         <>
             <div className="main-container">
-                <div className="main-wrapper">
-                    <div className="account-info">
-                        <Avatar
-                            src={env.SERVER_URL + playerInfo.avatarUrl}
-                            sx={{ width: 64, height: 64 }}
-                        />
-                        <p style={{
-                            color: "#373B44",
-                            fontSize: "18px",
-                            fontWeight: "700"
-                        }}>{playerInfo.playerId}</p>
+                <div className="account-info">
+                    <Avatar
+                        className="account-avatar"
+                        src={env.SERVER_URL + playerInfo.avatarUrl}
+                        sx={{ width: 82, height: 82 }}
+                    />
+                    <div className="account-info-str">
+                        <p>{playerInfo.playerId}</p>
                         {
                             accountIds?.length > 0 &&
                             <p>{accountIds[0]}</p>
                         }
                     </div>
-                    <div>
+                </div>
+                {
+                    currentMap === TOTAL_MAP &&
+                    <div className="total-map-wrapper">
                         <Tabs
                             className="lands-wrapper"
-                            value={selectedLand}
+                            value={selectedLandTabNo}
                             orientation="vertical"
-                            onChange={onChangeSelectLand}
+                            onChange={onChangeSelectedLandTabNo}
                             variant="scrollable"
                             scrollButtons
                             aria-label="visible arrows tabs example"
@@ -184,7 +252,67 @@ function Main() {
                             }
                         </Tabs>
                     </div>
-                </div>
+                }
+                {
+                    (currentMap === SINGLE_MAP || currentMap === EDIT_MAP) &&
+                    <div className="single-map-wrapper">
+                        <div className="map-info">
+                            <div className="map-detail">
+                                <div>
+                                    <ApartmentIcon />
+                                    <p>{currentLandInfo.buildingCount}</p>
+                                </div>
+                                <div>
+                                    <PeopleIcon />
+                                    <p>{currentLandInfo.customerCount}</p>
+                                </div>
+                                <div>
+                                    <TrendingUpIcon />
+                                    <p>{currentLandInfo.landBalance}</p>
+                                </div>
+                            </div>
+                            <p>{
+                                currentLandInfo.tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${currentLandInfo.serialNum}` :
+                                    currentLandInfo.tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${currentLandInfo.serialNum}` :
+                                        currentLandInfo.tokenId === env.MOGUL_NFT_ID ? `Mogul - ${currentLandInfo.serialNum}` : `Investor - ${currentLandInfo.serialNum}`
+                            }</p>
+                        </div>
+                        <img alt="" className="land-image"
+                            src={currentLandInfo.tokenId === env.DEGENLAND_NFT_ID ? "imgs/front/nfts/degenland.png" :
+                                currentLandInfo.tokenId === env.TYCOON_NFT_ID ? "imgs/front/nfts/tycoon.png" :
+                                    currentLandInfo.tokenId === env.MOGUL_NFT_ID ? "imgs/front/nfts/mogul.png" : "imgs/front/nfts/investor.png"} />
+                    </div>
+                }
+                {
+                    currentMap === EDIT_MAP &&
+                    <div className="edit-map-wrapper">
+                        <Box className="draw-map-tool">
+                            <Tabs
+                                value={drawMapToolValue}
+                                onChange={onChangeDrawMapTool}
+                                variant="scrollable"
+                                scrollButtons="auto"
+                                aria-label="scrollable auto tabs example"
+                            >
+                                <Tab icon={<TerrainIcon />} label="Ground" />
+                                <Tab icon={<AddRoadIcon />} label="Road" />
+                                <Tab icon={<ApartmentIcon />} label="Building" />
+                                <Tab icon={<ForestIcon />} label="Object" />
+                            </Tabs>
+                            <div className="map-content-wrapper">
+                                <Grid container>
+                                    {
+                                        groundTileInfo.map((item_, index_) => {
+                                            return <Grid item xs={12} md={6} className="single-map-tile" onClick={() => onClickTile(index_)}>
+                                                <img alt="" src={item_.url} />
+                                            </Grid>;
+                                        })
+                                    }
+                                </Grid>
+                            </div>
+                        </Box>
+                    </div>
+                }
             </div>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

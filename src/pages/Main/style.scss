@@ -4,11 +4,54 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
+    overflow: hidden;
 
-    .main-wrapper {
+    .account-info {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 200px;
+        height: 68px;
+        background-color: #00000010;
+        border-radius: 32px;
+        border-bottom: 5px solid #8b1832;
 
+        .MuiAvatar-root {
+            outline: 3px solid #8b1832;
+            background-color: white;
+            margin-left: -7px;
+        }
+
+        .account-info-str {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+
+            p {
+                margin: 0;
+                padding: 0;
+                color: #723232;
+                font-size: 14px;
+                font-weight: 500;
+
+                &:first-child {
+                    font-size: 20px;
+                    font-weight: 700;
+                    border-bottom: 3px solid #8b1832;
+                    color: #8b1832;
+                }
+            }
+
+        }
+
+    }
+
+    .total-map-wrapper {
         .lands-wrapper {
-            position: absolute;            
+            position: absolute;
             width: 240px;
             top: 100px;
             height: calc(100vh - 100px);
@@ -46,6 +89,135 @@
             .MuiTabs-indicator {
                 width: 7px;
                 background-color: #ffe67f;
+            }
+        }
+    }
+
+    .single-map-wrapper {
+        position: absolute;
+        width: 300px;
+        height: 72px;
+        top: 10px;
+        right: 10px;
+        background-color: #00000010;
+        border-radius: 50px;
+        border-top: 7px solid #167e4f;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+
+        .land-image {
+            width: 96px;
+            height: 96px;
+            margin-top: -8px;
+            margin-right: -8px;
+            border-radius: 100%;
+            border: 3px solid #167e4f;
+        }
+
+        .map-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: right;
+            margin-right: 10px;
+
+            p {
+                font-size: 20px;
+                font-weight: 700;
+                color: #167e4f;
+                margin: 0;
+                padding: 0;
+            }
+
+            .map-detail {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 180px;
+                margin-top: 5px;
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 700;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .edit-map-wrapper {
+        .draw-map-tool {
+            position: absolute;
+            top: 130px;
+            right: 0;
+            width: 320px;
+            height: calc(100vh - 130px);
+            background-color: #202124;
+
+            .MuiButtonBase-root {
+                width: 20px;
+                background-color: #202124;
+                color: wheat;
+
+                &:focus {
+                    outline: none;
+                }
+
+                span {
+                    background-color: transparent;
+                }
+            }
+
+            .MuiTab-root {
+                span {
+                    background-color: transparent;
+                }
+            }
+
+            span {
+                height: 4px;
+                background-color: wheat;
+            }
+
+            .map-content-wrapper {
+                width: 310px;
+                height: calc(100vh - 232px);
+                margin: 5px;
+                background-color: #505050;
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: transparent;
+                    border-radius: 100px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(200, 200, 200, 0.5);
+                    border-radius: 100px;
+                }
+
+                .single-map-tile {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    aspect-ratio: 1;
+                    border: 1px solid #202124;
+                    cursor: pointer;
+                }
             }
         }
     }
