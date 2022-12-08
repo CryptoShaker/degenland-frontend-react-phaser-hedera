@@ -28,7 +28,7 @@ function Main() {
 
     const [selectedLand, setSelectedLand] = useState(0);
 
-    const onChangeSelectLand = (newValue) => {
+    const onChangeSelectLand = (event: React.SyntheticEvent, newValue: number) => {
         setSelectedLand(newValue);
     };
 
@@ -166,39 +166,22 @@ function Main() {
                             }}
 
                         >
-                            <Tab
-                                icon={<img alt="" className="land-image"
-                                    src="imgs/front/nfts/degenland.png" />}
-                                label={walletNftInfo[0].tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${walletNftInfo[0].serialNum}` :
-                                    walletNftInfo[0].tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${walletNftInfo[0].serialNum}` :
-                                        walletNftInfo[0].tokenId === env.MOGUL_NFT_ID ? `Mogul - ${walletNftInfo[0].serialNum}` : `Investor - ${walletNftInfo[0].serialNum}`}
-                            />
-                            <Tab
-                                icon={<img alt="" className="land-image"
-                                    src="imgs/front/nfts/degenland.png" />}
-                                label={walletNftInfo[1].tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${walletNftInfo[1].serialNum}` :
-                                    walletNftInfo[1].tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${walletNftInfo[1].serialNum}` :
-                                        walletNftInfo[1].tokenId === env.MOGUL_NFT_ID ? `Mogul - ${walletNftInfo[1].serialNum}` : `Investor - ${walletNftInfo[1].serialNum}`}
-                            />
-                            <Tab
-                                icon={<img alt="" className="land-image"
-                                    src="imgs/front/nfts/degenland.png" />}
-                                label={walletNftInfo[2].tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${walletNftInfo[2].serialNum}` :
-                                    walletNftInfo[2].tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${walletNftInfo[2].serialNum}` :
-                                        walletNftInfo[2].tokenId === env.MOGUL_NFT_ID ? `Mogul - ${walletNftInfo[2].serialNum}` : `Investor - ${walletNftInfo[2].serialNum}`}
-                            />
-                            {/* {
+                            {
                                 walletNftInfo?.length > 0 &&
                                 walletNftInfo.map((item_, index_) => {
                                     return <Tab
                                         icon={<img alt="" className="land-image"
-                                            src="imgs/front/nfts/degenland.png" />}
-                                        label={item_.tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${item_.serialNum}` :
-                                            item_.tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${item_.serialNum}` :
-                                                item_.tokenId === env.MOGUL_NFT_ID ? `Mogul - ${item_.serialNum}` : `Investor - ${item_.serialNum}`}
+                                            src={item_.tokenId === env.DEGENLAND_NFT_ID ? "imgs/front/nfts/degenland.png" :
+                                                item_.tokenId === env.TYCOON_NFT_ID ? "imgs/front/nfts/tycoon.png" :
+                                                    item_.tokenId === env.MOGUL_NFT_ID ? "imgs/front/nfts/mogul.png" : "imgs/front/nfts/investor.png"} />}
+                                        label={
+                                            item_.tokenId === env.DEGENLAND_NFT_ID ? `Degenland - ${item_.serialNum}` :
+                                                item_.tokenId === env.TYCOON_NFT_ID ? `Tycoon - ${item_.serialNum}` :
+                                                    item_.tokenId === env.MOGUL_NFT_ID ? `Mogul - ${item_.serialNum}` : `Investor - ${item_.serialNum}`
+                                        }
                                     />;
                                 })
-                            } */}
+                            }
                         </Tabs>
                     </div>
                 </div>
