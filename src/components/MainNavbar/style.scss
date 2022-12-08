@@ -1,0 +1,75 @@
+.main-nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    background-color: black;
+    border-bottom: 1px solid grey;
+
+    .btn:hover {
+        background-color: gray;
+    }
+    .main-nav-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        
+        .chat-input {
+            position: absolute;
+            top: 21px;
+            left: 190px;
+            background-color: white;
+            height: 32px;
+            width: 200px;
+        }
+
+        .search-address-input {
+            position: absolute;
+            top: 21px;
+            right: 190px;
+            background-color: white;
+            height: 32px;
+            width: 200px;
+        }
+    }
+
+    .main-nav-link {
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background-color: transparent;
+        margin: 0 3px;
+        padding: 0;
+
+        img {
+            height: 32px;
+        }
+    }
+
+    .wallet-connect-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 142px;
+        height: 32px;
+        background-color: #5646fe;
+        margin: 0 5px;
+        padding: 0;
+
+        img {
+            height: 24px;
+        }
+
+        p {
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.main-container {
+    height: 100vh;
+    background-image: url("../../assets/imgs/front/home-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+
+    .main-wrapper {
+
+        .lands-wrapper {
+            width: 240px;
+            height: 500px;
+            background-color: #00000080;
+
+            .MuiButtonBase-root {
+                display: flex;
+                flex-direction: row;
+
+                .land-image {
+                    width: 64px;
+                }
+            }
+        }
+    }
+}
