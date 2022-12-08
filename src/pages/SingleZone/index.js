@@ -45,7 +45,6 @@ function SingleZone() {
                     <div className="map-content-wrapper">
                         <Grid container>
                             {
-//                                TREASURY_ID_SWAP === 1 &&
                                 groundTileInfo.map((item_, index_) => {
                                     return <Grid item xs={12} md={6} className="single-map-tile" onClick={() => onClickTile(index_)}>
                                         <img alt="" src={item_.url} />
