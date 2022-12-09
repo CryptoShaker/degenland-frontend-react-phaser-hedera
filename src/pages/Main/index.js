@@ -15,7 +15,8 @@ import TerrainIcon from '@mui/icons-material/Terrain';
 import AddRoadIcon from '@mui/icons-material/AddRoad';
 import ForestIcon from '@mui/icons-material/Forest';
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import { Button, Grid } from '@mui/material';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -37,6 +38,8 @@ function Main() {
 
     const [loginFlag, setLoginFlag] = useState(false);
     const [playerInfo, setPlayerInfo] = useState({});
+
+    const [chatStr, setChatStr] = useState("");
 
     const [walletNftInfo, setWalletNftInfo] = useState([]);
     const [currentLandInfo, setCurrentLandInfo] = useState({
@@ -84,7 +87,7 @@ function Main() {
     ]);
 
     const [selectedLandTabNo, setSelectedLand] = useState(0);
-    const [currentMap, setCurrentMap] = useState(MAP_TYPE[2]);
+    const [currentMap, setCurrentMap] = useState(MAP_TYPE[0]);
 
     const [drawMapToolValue, setDrawMapToolValue] = React.useState(0);
 
@@ -281,6 +284,15 @@ function Main() {
                             src={currentLandInfo.tokenId === env.DEGENLAND_NFT_ID ? "imgs/front/nfts/degenland.png" :
                                 currentLandInfo.tokenId === env.TYCOON_NFT_ID ? "imgs/front/nfts/tycoon.png" :
                                     currentLandInfo.tokenId === env.MOGUL_NFT_ID ? "imgs/front/nfts/mogul.png" : "imgs/front/nfts/investor.png"} />
+                    </div>
+                }
+                {
+                    currentMap === SINGLE_MAP &&
+                    <div className="chatting-wrapper">
+                        <input value={chatStr} onChange={(e) => { setChatStr(e.target.value) }} />
+                        <Button>
+                            <SendIcon />
+                        </Button>
                     </div>
                 }
                 {
